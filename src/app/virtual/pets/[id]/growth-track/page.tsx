@@ -1,8 +1,12 @@
+// 预生成静态路径
+export function generateStaticParams() {
+  return Object.keys(petData).map((id) => ({
+    id,
+  }));
+}
 'use client';
-export const runtime = 'edge';
-
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Camera, MapPin, ArrowLeft, X, Upload, Search } from 'lucide-react';
 
@@ -16,10 +20,13 @@ const petData: Record<string, { name: string; image: string }> = {
   '6': { name: '暹罗猫', image: '/image/暹罗猫.jpg' },
 };
 
-export default function GrowthTrackPage() {
-  const params = useParams();
+export default function GrowthTrackPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const router = useRouter();
-  const petId = params.id as string;
+  const petId = params.id;
   const currentPet = petData[petId] || petData['1'];
 
   // 状态管理
