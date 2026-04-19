@@ -1,7 +1,10 @@
-'use client';
-export const runtime = 'edge';
-
-import { useState, use } from 'react';
+// 预生成静态路径
+export function generateStaticParams() {
+  return Object.keys(virtualPets).map((id) => ({
+    id,
+  }));
+}
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PawPrint, TrendingUp, Target, ArrowLeft, X, RefreshCw } from 'lucide-react';
@@ -44,10 +47,9 @@ const virtualPets = {
 export default function VirtualPetDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const resolvedParams = use(params);
-  const petId = resolvedParams.id;
+  const petId = params.id;
   const pet = virtualPets[petId as keyof typeof virtualPets];
 
   // 状态管理
