@@ -1,6 +1,5 @@
 import GrowthTrackClient from './GrowthTrackClient';
 
-// 预生成静态路径
 export function generateStaticParams() {
   return [
     { id: '1' },
@@ -17,14 +16,5 @@ export default function GrowthTrackPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  return <GrowthTrackPageContent params={params} />;
-}
-
-async function GrowthTrackPageContent({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  return <GrowthTrackClient petId={id} />;
+  return <GrowthTrackClient params={params} />;
 }
