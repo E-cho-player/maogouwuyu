@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>成长轨迹 - 柴犬</title>
+		<style>
+			*{
+				margin: 0;
+				box-sizing: border-box;
+			}
+			.a{
+				position: fixed;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				height: 100vh;
+				top: 0;
+				left: 0;
+				width: 70px;
+				background-color: #fff;
+				padding:10px;
+			}
+			.a img{
+				width: 25px;
+				height: 25px;
+				object-fit: contain;
+				cursor: pointer;
+			}
+			.a .a1{
+				width: 40px;
+				height: 40px;
+				margin-bottom: 30px;
+			}
+			.a .a2,.a3,.a5{margin-bottom:20px ;}
+			.a .a4{margin-top: 350px}
+			.b{
+				background-color: #e0e0e0;
+				border-radius: 2vh;
+				margin-left: 70px;
+				
+			}
+			.c{
+				margin-left:70px;
+				background-color: #fff;
+				height:60px;
+				display: flex;
+				align-items: center;
+				position: fixed;
+				width: 100%;
+				}
+			.c1{margin-left:25px;}
+			.c2{margin-left: 10px;
+			color:#e0e0e0;}
+			.c3{margin-left: 500px;
+			width: 300px;
+			display: flex;
+			align-items: center;}
+			.c3 input{border-style: none;
+			height: 20px;}
+			.c3 img{
+			width:20px;
+			height: 20px;
+			margin-left: 5px;
+			cursor: pointer;}
+			.c4{background-color: #34d399;
+			border:0.1vh solid #34d399;
+			border-radius: 1vh;
+			height:30px;
+			width:70px;
+			color: #fff;
+			margin-left: 100px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;}
+			.d{
+				width:240px;
+				position: fixed;
+				right:0;
+				top:60px;
+				height: 100vh;
+				background-color:#fff;
+			}
+			.d1{
+				margin: 10px;
+				height: 140px;
+				display: flex;
+				justify-content:center;
+				align-items: center;
+				gap:30px;
+				border-bottom: 0.1vh solid #6d6d6d;}
+			.d3{display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;}
+			.d3 span{color:#6d6d6d}
+			.d4{width:80px;
+			height:80px;
+			border-radius: 0.5;
+			overflow: hidden;
+			transition: 0.3s;
+			cursor: pointer;
+			}
+			.d4 img{width:100%;
+			height: 100%;
+			object-fit: cover;}
+			.d2{width:100%;
+			height: 100%;
+			border-radius: 50%;}
+			.d4.gray{filter: grayscale(100%);opacity: 0.6;}
+			.e{
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.6);
+				justify-content: center;
+				align-items: center;
+				
+			}
+			.info-modal{
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.6);
+				justify-content: center;
+				align-items: center;
+				
+			}
+			.e-content ,.modal-content{
+				background-color: #fff;
+				padding: 24px;
+				border-radius: 1vh;
+				width: 90%;
+				max-width: 400px;
+			}
+			.e-title{
+				font-size: 18px;
+				font-weight: 500;
+				margin-bottom: 20px;
+				color:##34d399;
+			}
+			.e1{margin-bottom: 10px;}
+			.e1 label{
+				display: block;
+				margin-bottom: 6px;
+				font-weight: 500;
+			}
+			.e1 input{
+				width:100%;
+				padding: 10px;
+				border:0.1vh solid #ddd;
+				border-radius: 6px;
+				font-size: 16px;
+			}
+			.buttons{
+				display: flex;
+				gap:10px;
+				margin-top: 20px;
+			}
+			.modal-btn{
+				flex: 1;
+				padding: 10px;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+			}
+			.confirm{background-color: #34d399;
+			color: #fff;}
+			.cancel{background-color: #fff;
+			color:#333}
+			.b{
+				position: fixed;
+				background-color: #f0f0f0;
+				border-radius: 3vh;
+				margin-left: 70px;
+				margin-top: 60px;
+				margin-right: 240px;
+				height: 100%;
+				width: 963px;
+				z-index: -1;
+				overflow-y: scroll;
+				overflow-x: hidden;
+			}
+			.info-modal.modal-content{
+				text-align:center;
+				display: none;
+			}
+			.modal-content{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+			.info-img{
+			width:100px;
+			height:100px;
+			border-radius: 50%;
+			margin:0 auto 16px;
+			overflow: hidden;}
+			.info-img img{
+				width: 100%;
+				height: 100%;
+				object-fit: cover;	
+		     }
+			 .info-label{margin-bottom: 10px;}
+			.content{
+				width: 100%;
+				height: auto;
+				overflow:hidden;
+				padding: 20px;
+				padding-top: 0;
+			}
+			.blind-container{
+				display: flex;
+				justify-content: center;
+				align-items: flex-start;
+				width: 100%;
+				height: 300px;
+				margin-top:20px;
+				background-color: #fff;
+				overflow:hidden;
+				padding: 20px;
+				border-radius: 2vh;
+				
+			}
+			.blind-item{
+				flex:0 0 60px;
+				height:100%;
+				position: relative;
+				cursor: pointer;
+				transition: flex 0.6s cubic-bezier(0.25,0.1,0.25,1);
+				overflow: hidden;
+			}
+			.blind-item.active{
+				flex:1;
+			}
+			.blind-item img{
+				position:absolute;
+				top: 0;
+				left: 0;
+				height:100%;
+				width:auto;
+				min-width: 100%;
+				object-fit:cover;	
+			}
+			#create{
+				padding: 8px,16px;
+				cursor: pointer;
+				background-color: #34d399;
+				color: #fff;
+				border: #34d399;
+				border-radius: 1vh;
+				height:30px;
+				margin-top: 20px;
+			}
+			.b1{display: flex;
+			justify-content: center;
+			gap:20px;
+			flex-direction: column;}
+			.bb1{
+				height:120px ;
+				width: 100%;
+				background-color: #fff;
+				border-radius: 2vh;
+				display: flex;
+				align-items: center;
+			}
+			.bb1 img{
+				margin: 10px;
+				width: 100px;
+				height: auto;
+				object-fit: cover;
+				border-radius: 1vh;
+			}
+			.bb2{display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin-left: 20px;}
+			.s1{font-size: 30px;
+			font-weight: 600;}
+			.s2{font-size: 20px;
+			font-weight: 500;
+			color: #e0e0e0;}
+			#road{padding: 40px;}
+			.bb1:hover{
+				transform: scale(1.05);
+				box-shadow: 0 2px 4px rgba(0,0,0,0.1),
+				0 4px 12px rgba(0,0,0,0.15);
+			}
+			 display: flex;
+			}
+				border-color: #34d399;
+				box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 左侧 -->
+		<div class="a">
+			<img class="a1" id="a1" src="/image/猫狗图标.png" alt="" />
+			<img class="a2" id="a2" src="/image/相册1.png" alt="" />
+			<img class="a3" id="a3" src="/image/轨迹.png" alt="" />
+			<img class="a4" id="a4" src="/image/退出.png" alt="" />	
+		</div>
+		<!-- 上侧 -->
+		<div class="c">
+			<h3 class="c1">猫狗物语</h3>
+			<h3 class="c2">成长轨迹</h3>
+			<div class="c3">
+				<input type="text" placeholder="Search" />
+				<img src="/image/search.png" alt="" />
+			</div>
+			<button class="c4" id="settingbtn">个人信息</button>
+		</div>
+		<!-- 右侧信息 -->
+		<div class="d">
+			<div class="d1">
+				<div class="d4 gray" id="gray">
+					<img class="d2"id="grayimg" src="/image/未登录.png" alt="" />
+				</div>
+				<div class="d3">
+					<div class="greeting" id="greeting">你好，游客!</div>
+					<span class="tag"id="tag">未设置宠物</span>
+				</div>
+			</div>
+		</div>
+		<!-- 弹窗 -->
+		<div class="e" id="setting">
+			<div class="e-content">
+				<div class="e-title">个人信息</div>
+				<div class="e1">
+					<label>头像上传</label>
+					<input type="file" id="inputImg" accept="image/*" />
+				</div>
+				<div class="e1">
+					<label>你的名字</label>
+					<input type="text" id="nameinput" placeholder="请输入你的名字" />
+				</div>
+				<div class="e1">
+					<label>选择宠物</label>
+					<select id="petSelect" style="width: 100%; padding: 10px; border: 0.1vh solid #ddd; border-radius: 6px; font-size: 16px;">
+						<option value="柴犬">柴犬</option>
+						<option value="边牧">边牧</option>
+						<option value="马尔泰犬">马尔泰犬</option>
+						<option value="美短虎斑">美短虎斑</option>
+						<option value="英短蓝猫">英短蓝猫</option>
+						<option value="暹罗猫">暹罗猫</option>
+					</select>
+				</div>
+				<div class="e1">
+					<label>宠物名字</label>
+					<input type="text" id="petnameinput" placeholder="请输入宠物名字" />
+				</div>
+				<div class="e1">
+					<label>成长轨迹阶段</label>
+					<select id="stageSelect" style="width: 100%; padding: 10px; border: 0.1vh solid #ddd; border-radius: 6px; font-size: 16px;">
+						<option value="1">1天 - 初遇</option>
+						<option value="7">7天 - 第一次玩耍</option>
+						<option value="30">30天 - 学会新技能</option>
+						<option value="60">60天 - 疫苗接种</option>
+					</select>
+				</div>
+				<div class="buttons">
+					<button class="modal-btn cancel" id="cancel">取消</button>
+					<button class="modal-btn confirm" id="confirm">确认</button>
+				</div>
+			</div>
+		</div>
+		<div class="info-modal" id="infoModal">
+			<div class="modal-content">
+				<div class="info-img">
+					<img id="infoimg" src="" alt=""/>
+				</div>
+				<div class="info-label">主人：<span id="infoname"></span></div>
+				<div class="info-label">宠物：<span id="infopetname"></span></div>
+				<button class="modal-btn cancel" id="close" style="margin-top: 20px;">关闭</button>
+			</div>
+		</div>
+		<!-- 中间内容 -->
+		<div class="b">
+			<div class="content">
+				<div id="imgarea">
+					<div class="blind-container" id="gallery">
+						<div class="blind-item active">
+							<img src="/image/柴犬.jpg" alt="" />
+						</div>
+						<div class="blind-item">
+							<img src="/image/柴犬.jpg" alt="" />
+						</div>
+						<div class="blind-item">
+							<img src="/image/柴犬.jpg" alt="" />
+						</div>
+						<div class="blind-item">
+							<img src="/image/柴犬.jpg" alt="" />
+						</div>
+					</div>
+					<button id="create">创建相册</button>
+					<input type="file" id="fileinput" accept="image/*" multiple style="display: none;" />
+				</div>
+				<div id="road" style="display: none;">
+					<div class="b1">
+						<div class="bb1">
+							<img src="/image/柴犬.jpg" alt="" />
+							<div class="bb2">
+								<div class="s1">1天</div>
+								<div class="s2">初遇</div>
+							</div>
+						</div>
+						<div class="bb1">
+							<img src="/image/柴犬.jpg" alt="" />
+							<div class="bb2">
+								<div class="s1">7天</div>
+								<div class="s2">第一次玩耍</div>
+							</div>
+						</div>
+						<div class="bb1">
+							<img src="/image/柴犬.jpg" alt="" />
+							<div class="bb2">
+								<div class="s1">30天</div>
+								<div class="s2">学会新技能</div>
+							</div>
+						</div>
+						<div class="bb1">
+							<img src="/image/柴犬.jpg" alt="" />
+							<div class="bb2">
+								<div class="s1">60天</div>
+								<div class="s2">疫苗接种</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			// 获取元素
+			const setting=document.getElementById('setting');
+			const settingbtn=document.getElementById('settingbtn');
+			const cancel=document.getElementById('cancel');
+			const confirm=document.getElementById('confirm');
+			const inputImg=document.getElementById('inputImg');
+			const gray=document.getElementById('gray');
+			const grayimg=document.getElementById('grayimg');
+			const greeting=document.getElementById('greeting');
+			const tag=document.getElementById('tag');
+			const nameinput=document.getElementById('nameinput');
+			const petnameinput=document.getElementById('petnameinput');
+			const infoModal=document.getElementById('infoModal');
+			const close=document.getElementById('close');
+			const create=document.getElementById('create');
+			const fileinput=document.getElementById('fileinput');
+			const gallery=document.getElementById('gallery');
+			const imgarea=document.getElementById('imgarea');
+			const road=document.getElementById('road');
+			const a1=document.getElementById('a1');
+			const a2=document.getElementById('a2');
+			const a3=document.getElementById('a3');
+			const a4=document.getElementById('a4');
+			const stageSelect=document.getElementById('stageSelect');
+			
+			// 宠物名称映射（用于图片路径）
+			const petNameMap={
+				'柴犬': '柴犬',
+				'边牧': '边牧',
+				'马尔泰犬': '马尔泰',
+				'美短虎斑': '虎斑',
+				'英短蓝猫': '蓝猫',
+				'暹罗猫': '暹罗'
+			};
+			
+			// 装扮功能
+			let currentPet='柴犬'; // 当前宠物类型
+			let currentPetImage='柴犬'; // 当前宠物图片名称（特殊处理暹罗和蓝猫）
+			// 打开设置弹窗
+			settingbtn.addEventListener('click',()=>{
+				setting.style.display='flex';
+			});
+			// 关闭设置弹窗
+			cancel.addEventListener('click',()=>{
+				setting.style.display='none';
+			});
+			// 头像上传
+			let currentimgurl="";
+			inputImg.addEventListener('change',(e)=>{
+				const file=e.target.files[0];
+				if(!file)return;
+				if(currentimgurl){
+					URL.revokeObjectURL(currentimgurl);
+				}
+				currentimgurl=URL.createObjectURL(file);
+				grayimg.src=currentimgurl;
+				gray.classList.remove('gray');
+			});
+			let name='游客';
+			let petname='未命名';
+			let currentStage='1天'; // 当前成长轨迹阶段
+			// 改变显示
+			confirm.addEventListener('click',()=>{
+				name=nameinput.value.trim()||'游客';
+				petname=petnameinput.value.trim()||'未命名';
+				currentPet=petSelect.value;
+				currentPetImage=petNameMap[currentPet];
+				currentStage=stageSelect.value;
+				
+				// 更新宠物图片
+				const petImages=document.querySelectorAll('#gallery .blind-item img');
+				petImages.forEach(img=>{
+					img.src=`/image/${currentPetImage}.jpg`;
+				});
+				
+				// 更新成长轨迹中的宠物图片
+				const roadImages=document.querySelectorAll('#road .bb1 img');
+				roadImages.forEach(img=>{
+					img.src=`/image/${currentPetImage}.jpg`;
+				});
+				
+				// 更新标题
+				document.title=`成长轨迹 - ${currentPet}`;
+				
+				greeting.textContent=`你好，${name}`;
+				tag.textContent=`${petname}的主人`;
+				setting.style.display='none';
+			});
+			// 点击头像查看完整信息
+			grayimg.addEventListener('click',()=>{
+				infoimg.src=currentimgurl||'/image/未登录.png';
+				document.getElementById('infoname').textContent=name;
+				document.getElementById('infopetname').textContent=petname;
+				infoModal.style.display='flex';
+			});
+			close.addEventListener('click',()=>{
+				infoModal.style.display='none';});
+				// 上传照片生成相册
+				create.addEventListener('click',()=>{
+					fileinput.click();
+				})
+				fileinput.addEventListener('change',(e)=>{
+					const files=e.target.files;
+					if(!files.length)return;
+					images=[];
+					gallery.innerHTML='';
+					Array.from(files).forEach((file,index)=>{
+						const url=URL.createObjectURL(file);
+						images.push(url);
+						const item=document.createElement('div');
+						item.className='blind-item';
+						if(index==0)item.classList.add('active');
+						const img=document.createElement('img');
+						img.src=url;
+						item.appendChild(img);
+						gallery.appendChild(item);
+						item.addEventListener('click',()=>{
+							document.querySelectorAll('.blind-item').forEach(i=>i.classList.remove('active'));
+							item.classList.add('active');
+						});
+					});
+				});
+				// 切换界面
+				function first(){
+					a2.src='/image/相册1.png';
+					a3.src='/image/轨迹.png';
+					road.style.display='none';
+					imgarea.style.display='block';
+				}
+				a3.addEventListener('click',()=>{
+					a2.src='/image/相册.png';
+					a3.src='/image/轨迹1.png';
+					road.style.display='block';
+					imgarea.style.display='none';
+				})
+				a2.addEventListener('click',()=>{
+					a2.src='/image/相册1.png';
+					a3.src='/image/轨迹.png';
+					road.style.display='none';
+					imgarea.style.display='block';
+				});
+				// 返回
+				a4.addEventListener('click',()=>{
+					window.parent.postMessage({ type: 'goBack' }, '*');
+				});
+				a4.addEventListener('mouseenter',()=>{
+					a4.src='/image/推出1.png'
+				});
+				a4.addEventListener('mouseleave',()=>{
+					a4.src='/image/退出.png'
+				})

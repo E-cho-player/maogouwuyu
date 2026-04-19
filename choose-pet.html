@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>猫狗选择界面</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body,
+			html {
+				weight: 100%;
+				height: 100vh;
+			}
+
+			.a {
+				width: 100%;
+				height: 100vh;
+			}
+
+			.e {
+				color: rgba(143, 209, 225);
+				font-family: 幼圆, You Yuan, sans-serif;
+				font-size: 5vw;
+				position: absolute;
+				margin-bottom: 40px;
+				z-index: 10000;
+			}
+
+			.b {
+				width: 100%;
+				height: 100vh;
+				top: 0;
+				left: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+				position: absolute;
+				padding-bottom: 20px;
+			}
+
+			.d li {
+				position: absolute;
+				list-style: none;
+				width: 20px;
+				height: 20px;
+				display: block;
+				background-color: rgba(143, 209, 225);
+				bottom: -160px;
+				animation: animate 25s linear infinite;
+			}
+
+			.d {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+
+			.d li:nth-child(1) {
+				left: 25%;
+				width: 80px;
+				height: 80px;
+				animation-delay: 0s;
+			}
+
+			.d li:nth-child(2) {
+				left: 85%;
+				width: 160px;
+				height: 160px;
+				animation-delay: 2s;
+			}
+
+			.d li:nth-child(3) {
+				left: 65%;
+				width: 120px;
+				height: 120px;
+				animation-delay: 0s;
+				animation-duration: 45s;
+			}
+
+			.d li:nth-child(4) {
+				left: 30%;
+				width: 20px;
+				height: 20px;
+				animation-delay: 3s;
+			}
+
+			.d li:nth-child(5) {
+				left: 15%;
+				width: 80px;
+				height: 80px;
+				animation-delay: 1s;
+				animation-duration: 45s;
+			}
+
+			.d li:nth-child(6) {
+				left: 5%;
+				width: 100px;
+				height: 100px;
+				animation-delay: 7s;
+			}
+
+			.d li:nth-child(7) {
+				left: 60%;
+				width: 60px;
+				height: 60px;
+				animation-delay: 5s;
+				animation-duration: 25s;
+			}
+
+			.d li:nth-child(8) {
+				left: 45%;
+				width: 160px;
+				height: 160px;
+				animation-delay: 0s;
+			}
+
+			.d li:nth-child(9) {
+				left: 50%;
+				width: 90px;
+				height: 90px;
+				animation-delay: 2s;
+				animation-duration: 45s;
+			}
+
+			.d li:nth-child(10) {
+				left: 75%;
+				width: 140px;
+				height: 140px;
+				animation-delay: 0s;
+				animation-duration: 15s;
+			}
+
+			.c {
+				width: 100%;
+				height: 100vh;
+				background-color: rgba(254, 220, 94);
+			}
+
+			@keyframes animate {
+				0% {
+					transform: translateY(0) rotate(0deg);
+					opacity: 1;
+					border-radius: 0;
+				}
+
+				100% {
+					transform: translateY(-1000px) rotate(720deg);
+					opacity: 0;
+					border-radius: 50%;
+				}
+			}
+
+			.dogs img {
+				width: 30vh;
+				height: 40vh;
+				border-radius: 1vh;
+				object-fit: cover;
+			}
+
+			.cats img {
+				width: 30vh;
+				height: 40vh;
+				border-radius: 1vh;
+				object-fit: cover;
+			}
+
+			.dogs,
+			.cats {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				z-index: 1000;
+				gap: 40px;
+				margin-top: auto;
+			}
+
+			.dogs {
+				margin-bottom: 20px;
+			}
+
+			.cats {
+				margin-top: 0px;
+			}
+
+			.dogs img:hover,
+			.cats img:hover {
+				border: 4px solid rgba(143, 209, 225);
+				box-shadow: 0.8px 16px rgba(0, 0, 0, 0.2);
+				transform: scale(1.05);
+				transition: all 0.3s ease;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="a">
+			<div class="b">
+				<h1 class="e">请 选 择 你 的 宠 物</h1>
+				<div class="dogs">
+					<img src="/image/柴犬.jpg" alt="柴犬" onclick="jump1()" />
+					<img src="/image/边牧.jpg" alt="边牧" onclick="jump2()" />
+					<img src="/image/马尔泰犬.jpg" alt="马尔泰" onclick="jump3()"/>
+				</div>
+				<div class="cats">
+					<img src="/image/美短虎斑.jpg" alt="美短虎斑" onclick="jump4()"/>
+					<img src="/image/英短蓝猫.jpg" alt="英短蓝猫"onclick="jump5()" />
+					<img src="/image/暹罗猫.jpg" alt="暹罗猫" onclick="jump6()"/>
+				</div>
+			</div>
+			<div class="c">
+				<ul class="d">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			function jump1() {
+				window.parent.postMessage({ type: 'selectPet', pet: 'shiba' }, '*');
+			}
+			function jump2() {
+				window.parent.postMessage({ type: 'selectPet', pet: 'border' }, '*');
+			}
+			function jump3() {
+				window.parent.postMessage({ type: 'selectPet', pet: 'maltese' }, '*');
+			}
+			function jump4() {
+				window.parent.postMessage({ type: 'selectPet', pet: 'american' }, '*');
+			}
+			function jump5() {
+				window.parent.postMessage({ type: 'selectPet', pet: 'british' }, '*');
+			}
+			function jump6() {
+				window.parent.postMessage({ type: 'selectPet', pet: 'siamese' }, '*');
+			}
+		</script>
+	</body>
+</html>
