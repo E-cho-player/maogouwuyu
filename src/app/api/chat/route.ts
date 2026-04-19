@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { NextRequest } from 'next/server';
 
 // AI API 配置 - 从环境变量读取
