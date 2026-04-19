@@ -1,6 +1,5 @@
 import PetClient from './PetClient';
 
-// 预生成静态路径
 export function generateStaticParams() {
   return [
     { id: '1' },
