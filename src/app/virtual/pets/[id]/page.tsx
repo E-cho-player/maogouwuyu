@@ -1,6 +1,7 @@
-import PetClient from './PetClient';
+export const runtime = 'edge';
 export const dynamicParams = false;
 export const dynamic = 'force-static';
+import PetClient from './PetClient';
 
 export function generateStaticParams() {
   return [
