@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { Clock, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
