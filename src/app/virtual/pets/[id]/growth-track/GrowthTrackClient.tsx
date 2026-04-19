@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Camera, MapPin, ArrowLeft, X, Upload, Search } from 'lucide-react';
 
-// 宠物数据映射
 const petData: Record<string, { name: string; image: string }> = {
   '1': { name: '柴犬', image: '/image/柴犬.jpg' },
   '2': { name: '边牧', image: '/image/边牧.jpg' },
@@ -15,7 +14,9 @@ const petData: Record<string, { name: string; image: string }> = {
   '6': { name: '暹罗猫', image: '/image/暹罗.jpg' },
 };
 
-export default function GrowthTrackClient({ petId }: { petId: string }) {
+export default function GrowthTrackClient({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const petId = resolvedParams.id;
   const router = useRouter();
   const currentPet = petData[petId] || petData['1'];
 
@@ -63,7 +64,6 @@ export default function GrowthTrackClient({ petId }: { petId: string }) {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-      {/* 左侧导航栏 */}
       <div className="fixed left-0 top-0 h-full w-[70px] bg-white flex flex-col items-center py-4 z-50 shadow-sm">
         <div className="mb-8">
           <Image src="/image/猫狗图标.png" alt="猫狗物语" width={40} height={40} className="cursor-pointer" />
@@ -82,7 +82,6 @@ export default function GrowthTrackClient({ petId }: { petId: string }) {
         </button>
       </div>
 
-      {/* 顶部栏 */}
       <div className="fixed left-[70px] top-0 right-0 h-[60px] bg-white flex items-center px-6 z-40 shadow-sm">
         <h3 className="text-lg font-bold text-gray-800">猫狗物语</h3>
         <h3 className="ml-3 text-lg text-gray-400">成长轨迹</h3>
@@ -97,7 +96,6 @@ export default function GrowthTrackClient({ petId }: { petId: string }) {
         </button>
       </div>
 
-      {/* 右侧个人信息栏 */}
       <div className="fixed right-0 top-[60px] w-[240px] h-[140px] bg-white flex items-center justify-center gap-6 border-b border-gray-200 z-40">
         <div className="w-[80px] h-[80px] rounded-full overflow-hidden cursor-pointer hover:ring-2 hover:ring-green-500 transition-all" onClick={() => setShowInfoModal(true)}>
           <Image src={avatarFile || userInfo.avatar} alt="头像" width={80} height={80} className="w-full h-full object-cover" />
@@ -108,7 +106,6 @@ export default function GrowthTrackClient({ petId }: { petId: string }) {
         </div>
       </div>
 
-      {/* 主内容区 */}
       <div className="ml-[70px] mt-[60px] mr-[240px] flex-1 p-6 overflow-y-auto h-screen">
         {activeTab === 'album' && (
           <div className="space-y-6">
@@ -183,7 +180,6 @@ export default function GrowthTrackClient({ petId }: { petId: string }) {
         )}
       </div>
 
-      {/* 个人信息设置弹窗 */}
       {showSettingModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[400px] max-w-[90%]">
@@ -226,7 +222,6 @@ export default function GrowthTrackClient({ petId }: { petId: string }) {
         </div>
       )}
 
-      {/* 个人详情弹窗 */}
       {showInfoModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[400px] max-w-[90%]">
