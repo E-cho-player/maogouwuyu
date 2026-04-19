@@ -1,5 +1,7 @@
 import GrowthTrackClient from './GrowthTrackClient';
 
+export const dynamic = 'force-static';
+
 export function generateStaticParams() {
   return [
     { id: '1' },
