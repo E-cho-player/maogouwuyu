@@ -1,5 +1,5 @@
 import GrowthTrackClient from './GrowthTrackClient';
-
+export const dynamicParams = false;
 export const dynamic = 'force-static';
 
 export function generateStaticParams() {
