@@ -1,23 +1,23 @@
+export const runtime = 'edge';
 
-export const dynamicParams = false;
-export const dynamic = 'force-static';
-import PetClient from './PetClient';
+import { notFound } from 'next/navigation';
+// ... 其他原有 import
 
-export function generateStaticParams() {
-  return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-  ];
-}
+// 删除 generateStaticParams 函数
+// 删除 dynamicParams 和 dynamic 配置
 
-export default function VirtualPetDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  return <PetClient params={params} />;
+// 页面组件保持不变
+export default async function PetPage({ params }: { params: { id: string } }) {
+  const { id } = params;
+  
+  // 根据 id 动态获取宠物数据
+  const pet = await getPetById(id); // 假设你有这个函数
+  
+  if (!pet) {
+    notFound();
+  }
+  
+  return (
+    // 原有的 JSX
+  );
 }
